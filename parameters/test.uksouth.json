@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "backupAccountNamePrefix": {
+      "value": "backupsa"
+    },    
+    "dataDisks": {
+      "value": [
+        {
+          "createOption": "attach",
+          "caching": "ReadOnly",
+          "writeAcceleratorEnabled": false,
+          "storageAccountType": "Premium_LRS",
+          "diskSizeGB": 64
+        },
+        {
+          "createOption": "attach",
+          "caching": "None",
+          "writeAcceleratorEnabled": false,
+          "storageAccountType": "Premium_LRS",
+          "diskSizeGB": 32
+        }
+      ]
+    },
+    "networkSecurityGroupName": {
+      "value": "mark-test-nsg"
+    },
+    "resourceGroupName": {
+      "value": "mark-test-rg"
+    },
+    "vnetAddressRange": {
+      "value": "10.10.10.0/24"
+    },
+    "vmName": {
+      "value": "mark-test-vm1"
+    },
+    "vmSize": {
+      "value": "Standard_B2ms"
+    } ,
+    "subnetAddressRange": {
+      "value": "10.10.10.0/26"
+    },
+    "subnetName": {
+      "value": "default"
+    },    
+    "vnetName": {
+      "value": "mark-test-vnet"
+    }
+  }
+}
