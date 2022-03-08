@@ -106,6 +106,7 @@ param vnetName string
 var nicName = '${vmName}-nic1'
 var pipName = '${vmName}-pip1'
 var vmFqdn = '${vmName}.${location}.cloudapp.azure.com'
+var backupAccountName = '${backupAccountNamePrefix}${uniqueString(resourceGroup().id)}'
 
 // this is the existing VNet
 resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' existing = {
@@ -157,7 +158,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
         }
       }
     ]
-    enableAcceleratedNetworking: true
+    enableAcceleratedNetworking: false
   }
 }
 
@@ -243,9 +244,9 @@ resource vmschedule 'Microsoft.DevTestLab/schedules@2018-09-15' = if (autoShutdo
     vm
   ]
 }
-/*
 
-// this extension installs SQL Server IaaS to support SSIS
+
+// this extension installs SQL Server
 resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-preview' = {
   name: vmName
   location: location
@@ -262,8 +263,8 @@ resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-previ
     autoBackupSettings: {
       enable: true
       retentionPeriod: sqlAutobackupRetentionPeriod
-      storageAccountUrl: reference(resourceId(storageResourceGroup, 'Microsoft.Storage/storageAccounts', backupAccountName), '2018-07-01').primaryEndpoints.blob
-      storageAccessKey: first(listKeys(resourceId(storageResourceGroup, 'Microsoft.Storage/storageAccounts', backupAccountName), '2018-07-01').keys).value
+      storageAccountUrl: reference(resourceId( 'Microsoft.Storage/storageAccounts', backupAccountName), '2018-07-01').primaryEndpoints.blob
+      storageAccessKey: first(listKeys(resourceId( 'Microsoft.Storage/storageAccounts', backupAccountName), '2018-07-01').keys).value
       enableEncryption: false
       backupSystemDbs: true
       backupScheduleType: 'Automated'
@@ -300,13 +301,3 @@ resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-previ
     vm
   ]
 }
-
-resource sqlvmlock 'Microsoft.Authorization/locks@2016-09-01' = if(protectWithLocks) {
-  name: '${vmName}-sql-lock'
-  scope: sql_vm
-  properties: {
-    level: 'CanNotDelete'
-    notes: 'Sql IaaS VM extension should not be deleted.'
-  }
-}
-*/

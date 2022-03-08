@@ -8,14 +8,14 @@
     "dataDisks": {
       "value": [
         {
-          "createOption": "attach",
+          "createOption": "empty",
           "caching": "ReadOnly",
           "writeAcceleratorEnabled": false,
           "storageAccountType": "Premium_LRS",
           "diskSizeGB": 64
         },
         {
-          "createOption": "attach",
+          "createOption": "empty",
           "caching": "None",
           "writeAcceleratorEnabled": false,
           "storageAccountType": "Premium_LRS",
