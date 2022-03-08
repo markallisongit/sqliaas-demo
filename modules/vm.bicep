@@ -127,7 +127,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
     name: pipSku
   }
   properties: {
-    publicIPAllocationMethod: 'Static'
+    publicIPAllocationMethod: 'Dynamic'
     publicIPAddressVersion: 'IPv4'
     idleTimeoutInMinutes: 4
     dnsSettings: {
@@ -157,7 +157,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-05-01' = {
         }
       }
     ]
-    enableAcceleratedNetworking: true
+    enableAcceleratedNetworking: false
   }
 }
 
@@ -243,7 +243,7 @@ resource vmschedule 'Microsoft.DevTestLab/schedules@2018-09-15' = if (autoShutdo
     vm
   ]
 }
-/*
+
 
 // this extension installs SQL Server IaaS to support SSIS
 resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-preview' = {
@@ -300,13 +300,3 @@ resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-previ
     vm
   ]
 }
-
-resource sqlvmlock 'Microsoft.Authorization/locks@2016-09-01' = if(protectWithLocks) {
-  name: '${vmName}-sql-lock'
-  scope: sql_vm
-  properties: {
-    level: 'CanNotDelete'
-    notes: 'Sql IaaS VM extension should not be deleted.'
-  }
-}
-*/
