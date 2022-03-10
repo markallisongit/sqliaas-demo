@@ -70,7 +70,7 @@ var tags = {
   'Contact': 'home@markallison.co.uk'
   'Project': 'Azure demo'
   'Env': environment
-  'Description': 'Code for article https://markallison.co.uk'
+  'Description': 'Demo for article https://markallison.co.uk/sqliaas-problem/'
 }
 
 // create the resource group
