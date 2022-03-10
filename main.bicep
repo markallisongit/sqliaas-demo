@@ -36,8 +36,8 @@ param subnetAddressRange string
 @description('Name of the subnet')
 param subnetName string
 
-@description('Azure SQL Virtual Machine name')
-param vmName string
+@description('Azure SQL Virtual Machine name prefix')
+param vmNamePrefix string
 
 param vmSize string
 
@@ -116,7 +116,7 @@ module vm './modules/vm.bicep' = {
     location: location
     subnetName: subnetName
     tags: tags
-    vmName: vmName
+    vmName: vmNamePrefix
     vmSize: vmSize
     vnetName: vnetName
   }

@@ -32,8 +32,8 @@
     "vnetAddressRange": {
       "value": "10.10.10.0/24"
     },
-    "vmName": {
-      "value": "mark-test-vm1"
+    "vmNamePrefox": {
+      "value": "marktestvm"
     },
     "vmSize": {
       "value": "Standard_B2ms"

@@ -94,8 +94,8 @@ param tags object
 @description('Default path for SQL Temp DB files. Use the fast local temp disk')
 param tempDBPath string = 'D:\\SQLTemp'
 
-@description('Azure SQL Virtual Machine name')
-param vmName string
+@description('Azure SQL Virtual Machine name prefix')
+param vmNamePrefix string
 
 @description('Size for the Azure Virtual Machines')
 param vmSize string
@@ -107,6 +107,7 @@ var nicName = '${vmName}-nic1'
 var pipName = '${vmName}-pip1'
 var vmFqdn = '${vmName}.${location}.cloudapp.azure.com'
 var backupAccountName = '${backupAccountNamePrefix}${uniqueString(resourceGroup().id)}'
+var vmName = '${vmNamePrefix}${uniqueString(resourceGroup().id)}'
 
 // this is the existing VNet
 resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' existing = {
