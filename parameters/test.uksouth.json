@@ -32,7 +32,7 @@
     "vnetAddressRange": {
       "value": "10.10.10.0/24"
     },
-    "vmNamePrefix": {
+    "vmName": {
       "value": "marktestvm"
     },
     "vmSize": {

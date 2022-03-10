@@ -95,7 +95,7 @@ param tags object
 param tempDBPath string = 'D:\\SQLTemp'
 
 @description('Azure SQL Virtual Machine name prefix')
-param vmNamePrefix string
+param vmName string
 
 @description('Size for the Azure Virtual Machines')
 param vmSize string
@@ -107,7 +107,7 @@ var nicName = '${vmName}-nic1'
 var pipName = '${vmName}-pip1'
 var vmFqdn = '${vmName}.${location}.cloudapp.azure.com'
 var backupAccountName = '${backupAccountNamePrefix}${uniqueString(resourceGroup().id)}'
-var vmName = '${vmNamePrefix}${uniqueString(resourceGroup().id)}'
+var vmDnsName = '${vmName}${uniqueString(resourceGroup().id)}'
 
 // this is the existing VNet
 resource vnet 'Microsoft.Network/virtualNetworks@2020-06-01' existing = {
@@ -133,7 +133,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-05-01' = {
     publicIPAddressVersion: 'IPv4'
     idleTimeoutInMinutes: 4
     dnsSettings: {
-      domainNameLabel: vmName
+      domainNameLabel: vmDnsName
       fqdn: vmFqdn
     }
   }
