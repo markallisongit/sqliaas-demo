@@ -116,7 +116,7 @@ module vm './modules/vm.bicep' = {
     location: location
     subnetName: subnetName
     tags: tags
-    vmName: vmNamePrefix
+    vmNamePrefix: vmNamePrefix
     vmSize: vmSize
     vnetName: vnetName
   }
