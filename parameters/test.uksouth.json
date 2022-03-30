@@ -20,7 +20,14 @@
           "writeAcceleratorEnabled": false,
           "storageAccountType": "Premium_LRS",
           "diskSizeGB": 32
-        }
+        },
+        {
+          "createOption": "empty",
+          "caching": "ReadOnly",
+          "writeAcceleratorEnabled": false,
+          "storageAccountType": "Premium_LRS",
+          "diskSizeGB": 128
+        }        
       ]
     },
     "networkSecurityGroupName": {

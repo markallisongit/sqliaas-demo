@@ -91,8 +91,13 @@ param sqlStorageWorkloadType string = 'GENERAL'
 
 param tags object
 
-@description('Default path for SQL Temp DB files. Use the fast local temp disk')
-param tempDBPath string = 'D:\\SQLTemp'
+@description('Default path for SQL Temp DB files. Use Premium attached disk, local SSD not working.')
+param tempDBPath string = 'H:\\tempDb'
+
+@description('Logical Disk Numbers (LUN) for SQL tempDb disks.')
+param tempDbDisksLUNs array = [
+  2
+]
 
 @description('Azure SQL Virtual Machine name prefix')
 param vmName string
@@ -283,6 +288,7 @@ resource sql_vm 'Microsoft.SqlVirtualMachine/sqlVirtualMachines@2017-03-01-previ
         defaultFilePath: logPath
       }
       sqlTempDbSettings: {
+        luns: tempDbDisksLUNs
         defaultFilePath: tempDBPath
       }
     }
