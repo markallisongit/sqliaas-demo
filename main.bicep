@@ -47,6 +47,9 @@ param vnetAddressRange string
 @description('Vnet name')
 param vnetName string
 
+// this script sets SQL Server and SQL Server Agent to delayed Start to avoid race condition
+var script = 'sc.exe config SQLSERVERAGENT start= delayed-auto; sc.exe config MSSQLSERVER start= delayed-auto;'
+
 var securityRules = [
   {
     name: 'let-me-in'
@@ -124,5 +127,19 @@ module vm './modules/vm.bicep' = {
   dependsOn: [
     vnet
     storageAcct
+  ]
+}
+
+module vm_run_cmd './modules/vm-run-cmd.bicep' = {
+  name: 'setSqlDelayedStart.${deploymentNameSuffix}'
+  params: {
+    name: '${vmName}/sqlDelayedStart'
+    location: location
+    script: script
+    timeoutInSeconds: 120
+  }
+  scope: rg
+  dependsOn: [
+    vm
   ]
 }

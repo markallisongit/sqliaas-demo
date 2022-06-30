@@ -36,7 +36,7 @@
       "value": "marktestvm"
     },
     "vmSize": {
-      "value": "Standard_B2ms"
+      "value": "Standard_E4ds_v5"
     } ,
     "subnetAddressRange": {
       "value": "10.10.10.0/26"
